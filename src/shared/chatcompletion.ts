@@ -1,14 +1,14 @@
-import { Configuration, OpenAIApi } from 'openai';
+/* eslint-disable camelcase */
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from 'openai';
 import { ErrorResult } from './types';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export async function CreateCompletion(prompt: string, maxTokens: number, temperature: number): Promise<string> {
-
+export async function CreateChatCompletion(messages: ChatCompletionRequestMessage[], maxTokens = 256): Promise<string> {
   let result = '';
 
   if (configuration.apiKey === undefined) {
@@ -16,16 +16,16 @@ export async function CreateCompletion(prompt: string, maxTokens: number, temper
   }
   else
     try {
-      const completion = await openai.createCompletion({
-        model: 'text-davinci-003',
-        // eslint-disable-next-line camelcase
+      const response = await openai.createChatCompletion({
+        model: 'gpt-3.5-turbo',
+        messages,
+        temperature: 1,
         max_tokens: maxTokens,
-        prompt,
-        temperature
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
       });
-
-      result = (completion.data.choices[0].text as string);
-
+      result = (response.data.choices[0].message?.content as string);
     }
     catch (error) {
       const errRes: ErrorResult = (error as ErrorResult);
