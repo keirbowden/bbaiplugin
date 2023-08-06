@@ -1,7 +1,7 @@
 {
   "name": "bbai",
   "description": "Bob Buzzard's AI Powered Plug-In",
-  "version": "1.1.0",
+  "version": "1.2.2",
   "dependencies": {
     "@oclif/core": "^2.8.2",
     "@salesforce/core": "^3.34.8",
@@ -68,6 +68,12 @@
     "topics": {
       "explain": {
         "description": "Commands to explain various topics."
+      },
+      "data": {
+        "description": "Commands to generate test data."
+      },
+      "org": {
+        "description": "Commands that access a Salesforce org."
       }
     }
   },

@@ -20,3 +20,13 @@ export type ErrorResult = {
   message: string;
 };
 
+export type FunctionDef = {
+  name?: string;
+  description?: string;
+  parameters?: Params;
+}
+
+export type Params = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}

@@ -64,11 +64,11 @@ export default class TestData extends SfCommand<ExplainResult> {
     const resp = await CreateChatCompletion(chatMessages, maxTokens);
 
     this.log(messages.getMessage('info.results'));
-    this.log(resp);
+    this.log(resp as string);
 
     return {
       result: 'Success',
-      output: resp
+      output: resp as string
     };
   }
 }
